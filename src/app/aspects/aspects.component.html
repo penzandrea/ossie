@@ -1,0 +1,17 @@
+<h2>ASPECTS</h2>
+<div class="container ">
+  <div class="row mat-card" *ngFor="let aspect of aspects" [class.selected]="bear === selectedBear">
+    <div class="mat-card-content">
+      <h4 class="mat-card-title">{{ aspect.name }}</h4>
+      <div>
+        <button (click)="edit(bear)">Edit ..{{ aspect._id }}</button>
+        <button (click)="onSelect(bear)">View details ..{{ aspect._id }}</button>
+      </div>
+    </div>
+  </div>
+  <button (click)="newBear()">Add new Bear</button>
+
+  <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
+
+
+</div>
