@@ -1,0 +1,18 @@
+{
+   "/aspects": {
+      "target": "http://localhost:8888/",
+      "secure": false,
+      "logLevel": "debug"
+    },
+  "/factors": {
+    "target": "http://localhost:8888/",
+    "secure": false,
+    "logLevel": "debug"
+  },
+  "/projects": {
+    "target": "http://localhost:8888/",
+    "secure": false,
+    "logLevel": "debug"
+  }
+
+}

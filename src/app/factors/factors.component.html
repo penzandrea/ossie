@@ -1,0 +1,18 @@
+<h2>Factors</h2>
+<md-selection-list class="container">
+  <md-list-option *ngFor="let factor of factors" [class.selected]="bear === selectedBear">
+    <h4 class="mat-card-title">{{ factor.name }}</h4>
+    <!--<div>-->
+
+    <!--                <button (click)="edit(bear)">Edit ..{{ aspect._id }}</button>
+                    <button (click)="onSelect(bear)">View details ..{{ aspect._id }}</button>-->
+
+    <!--</div>-->
+  </md-list-option>
+
+  <!--<button (click)="newBear()">Add new Bear</button>-->
+  <!---->
+  <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
+
+
+</md-selection-list>

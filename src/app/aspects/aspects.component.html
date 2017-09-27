@@ -1,17 +1,18 @@
-<h2>ASPECTS</h2>
-<div class="container ">
-  <div class="row mat-card" *ngFor="let aspect of aspects" [class.selected]="bear === selectedBear">
-    <div class="mat-card-content">
-      <h4 class="mat-card-title">{{ aspect.name }}</h4>
-      <div>
-        <button (click)="edit(bear)">Edit ..{{ aspect._id }}</button>
-        <button (click)="onSelect(bear)">View details ..{{ aspect._id }}</button>
-      </div>
-    </div>
-  </div>
-  <button (click)="newBear()">Add new Bear</button>
+<h2>Aspects</h2>
+<md-selection-list class="container">
+    <md-list-option *ngFor="let aspect of aspects" [class.selected]="bear === selectedBear">
+            <h4 class="mat-card-title">{{ aspect.name }}</h4>
+            <!--<div>-->
 
-  <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
+<!--                <button (click)="edit(bear)">Edit ..{{ aspect._id }}</button>
+                <button (click)="onSelect(bear)">View details ..{{ aspect._id }}</button>-->
+
+            <!--</div>-->
+    </md-list-option>
+
+    <!--<button (click)="newBear()">Add new Bear</button>-->
+<!---->
+    <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
 
 
-</div>
+</md-selection-list>

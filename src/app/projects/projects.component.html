@@ -1,0 +1,17 @@
+<h2>Projects</h2>
+<md-selection-list class="container">
+  <md-list-option *ngFor="let project of projects" [class.selected]="project === selectedProject">
+    <h4 class="mat-card-title">{{ project.name }}</h4>
+
+    <!--                <button (click)="edit(bear)">Edit ..{{ aspect._id }}</button>-->
+                    <button (click)="onSelect(project)">View details ..{{ project.id }}</button>
+
+    <!--</div>-->
+  </md-list-option>
+
+  <!--<button (click)="newBear()">Add new Bear</button>-->
+  <!---->
+  <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
+
+
+</md-selection-list>

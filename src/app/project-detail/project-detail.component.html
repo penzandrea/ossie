@@ -1,0 +1,58 @@
+<div class="container">
+
+<!--    <div class="card card-block">
+    <div>{{project | json}}</div>
+
+      <div>
+          <h1>{{project?.name}}</h1>
+          <p>Age ..{{ project?.sonarkey }}</p>
+          <p>Id ..{{ project?.id }}</p>
+      </div>
+    </div>-->
+
+    <h1>{{project?.name}} Details</h1>
+
+  <p class="error" *ngIf="errorMesssonarkey">{{errorMesssonarkey}}</p>
+
+
+<!--
+  <h3><i>A FormGroup with multiple FormControls</i></h3>
+-->
+<form [formGroup]="projectForm" (ngSubmit)="onSubmit()" novalidate>
+
+  <div class="form-group">
+
+  <div class="form-group">
+  <!--street-->
+    <label class="center-block">ID:
+      <input class="form-control" formControlName="id">
+    </label>
+  </div>
+
+    <label class="center-block">Name:
+      <input class="form-control" formControlName="name">
+    </label>
+  </div>
+<!--city-->
+  <div class="form-group">
+    <label class="center-block">Sonarkey:
+      <input class="form-control" formControlName="sonarkey">
+    </label>
+  </div>
+  
+ <!-- <button type="submit"
+            [disabled]="projectForm.pristine" class="btn btn-success">Save</button> &nbsp;-->
+</form>
+
+    <button (click)="showIssues()">Show Issues</button>
+
+    <button (click)="goBack()">Back</button>
+
+<!--<p>Form value: {{ projectForm.value | json }}</p>
+<p>Form status: {{ projectForm.status | json }}</p>
+<p>Name value: {{ projectForm.get('name').value }}</p>
+<p>Name pristine: {{ projectForm.get('name').pristine }}</p>
+<p>Name untouched: {{ projectForm.get('name').untouched }}</p>-->
+
+
+</div>

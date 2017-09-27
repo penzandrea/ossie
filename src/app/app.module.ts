@@ -16,7 +16,13 @@ import {FileSelectDirective} from "ng2-file-upload/ng2-file-upload";
 import {BearCreateComponentComponent} from "./bear-create-component/bear-create-component.component";
 import {BearCreateComponent} from "./bear-create/bear-create.component";
 import {HeroFormComponent} from "./hero-form.component";
-import {MaterialModule} from "@angular/material";
+import {MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule,  MdDialogModule,  MdFormFieldModule, MdSelectModule, MdListModule} from "@angular/material";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { FactorsComponent } from './factors/factors.component';
+import { FactorsServiceService} from './factors-service.service';
+import { ProjectsComponent } from './projects/projects.component';
+import { ProjectsService} from './projects.service';
+import { ProjectDetailComponent } from './project-detail/project-detail.component';
 
 
 @NgModule({
@@ -27,7 +33,16 @@ import {MaterialModule} from "@angular/material";
     JsonpModule,
     RoutingModule, // Add routes to the app
     ReactiveFormsModule,
-    MaterialModule
+    BrowserAnimationsModule,
+    MdSelectModule,
+    MdButtonModule,
+    MdListModule,
+    MdMenuModule,
+    MdCardModule,
+    MdToolbarModule,
+    MdDialogModule,
+    MdFormFieldModule,
+    MdIconModule
   ],
     declarations: [
     AppComponent,
@@ -40,10 +55,14 @@ import {MaterialModule} from "@angular/material";
     FileSelectDirective,
     BearCreateComponentComponent,
     BearCreateComponent,
-    HeroFormComponent
-  ],
+    HeroFormComponent,
+    FactorsComponent,
+    ProjectsComponent,
+    ProjectDetailComponent,
+
+    ],
   providers: [BearsService,
-  AspectsService],
+  AspectsService, FactorsServiceService, ProjectsService],
   bootstrap: [AppComponent],
 
 })
