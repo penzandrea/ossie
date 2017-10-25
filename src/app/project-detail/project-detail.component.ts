@@ -1,19 +1,19 @@
 /*
-import 'rxjs/add/operator/switchMap';
+ import 'rxjs/add/operator/switchMap';
 
-import { Component, OnInit } from '@angular/core';
-import { FormControl }            from '@angular/forms';
-*/
-import { Location }               from '@angular/common';
+ import { Component, OnInit } from '@angular/core';
+ import { FormControl }            from '@angular/forms';
+ */
+import {Location} from "@angular/common";
+import "rxjs/add/operator/map";
+import {Component, Input, OnChanges, OnInit} from "@angular/core";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
+import {Project} from "../model/project";
+import {ProjectsService} from "../projects.service";
+import {IssuesService} from "../issues.service";
+import {Issue} from "../model/issue";
 
-import 'rxjs/add/operator/map';
-import { Component, Input, OnChanges, OnInit }             from '@angular/core';
-import { FormBuilder, FormGroup, Validators }      from '@angular/forms';
-import { ActivatedRoute, Params, ParamMap, Router } from '@angular/router';
-
-
-import { Project }         from '../model/project';
-import { ProjectsService }  from '../projects.service';
 
 @Component({
   selector: 'app-project-detail',
@@ -37,12 +37,17 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
 @Input() project: Project;
 
   projectForm: FormGroup;
+  issuesShown: boolean;
   //states = states;
+  issues: Issue[];
+  errorMessage: string;
 
-  
+
+
   constructor(private fb: FormBuilder,
       private projectsService: ProjectsService,
-      private route: ActivatedRoute,
+              private issuesService: IssuesService,
+              private route: ActivatedRoute,
       private location: Location,
       private router: Router
   ) {
@@ -65,6 +70,29 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
 
   showIssues() {
     console.log('Show Issues');
+    this.issuesShown = true;
+    this.getIssues();
+  }
+
+  getIssues() {
+    // Retrieve posts from the API
+
+    this.route.paramMap
+        .switchMap((params: ParamMap) =>
+            this.issuesService.getIssues(Number(params.get('id'))))
+        .subscribe(
+            issues => this.issues = issues
+        );
+
+   // this.issuesService.getAllIssues()
+   //      .subscribe(
+   //          issues => this.issues = issues,
+   //          error => this.errorMessage = <any>error);
+
+/*     this.projectService.getBear().subscribe(
+     users => console.log('users', users),
+     error => console.error('error', error));*/
+
   }
   onSubmit() {
     this.project = this.prepareSaveProject();
@@ -103,14 +131,15 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
   }
 
   goBack(): void {
-    //this.location.back();
+    this.location.back();
     let projectId = this.project ? this.project.id : null;
 
     this.router.navigate(['/projects', { id: projectId, foo: 'foo' }]);
     }
 
   setup(){
-console.log('setup');
+      console.log('setup');
+      this.issuesShown = false;
       this.route.paramMap
       .switchMap((params: ParamMap) =>
         this.projectsService.getProject(Number(params.get('id'))))

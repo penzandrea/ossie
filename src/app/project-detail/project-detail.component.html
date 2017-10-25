@@ -33,18 +33,42 @@
       <input class="form-control" formControlName="name">
     </label>
   </div>
-<!--city-->
+  <!--city-->
   <div class="form-group">
     <label class="center-block">Sonarkey:
       <input class="form-control" formControlName="sonarkey">
     </label>
   </div>
-  
- <!-- <button type="submit"
+  <!-- <button type="submit"
             [disabled]="projectForm.pristine" class="btn btn-success">Save</button> &nbsp;-->
 </form>
 
     <button (click)="showIssues()">Show Issues</button>
+
+  <div *ngIf="issuesShown">
+    <h2>
+      {{project.name | uppercase}} is my hero
+    </h2>
+
+    <md-selection-list class="container">
+      <md-list-option *ngFor="let issue of issues" [class.selected]="bear === selectedBear">
+        <h4 class="mat-card-title">{{ issue.key }}</h4>
+        <!--<div>-->
+
+        <!--                <button (click)="edit(bear)">Edit ..{{ aspect._id }}</button>
+                        <button (click)="onSelect(bear)">View details ..{{ aspect._id }}</button>-->
+
+        <!--</div>-->
+      </md-list-option>
+
+      <!--<button (click)="newBear()">Add new Bear</button>-->
+      <!---->
+      <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
+
+
+    </md-selection-list>
+    <button (click)="gotoDetail()">View Details</button>
+  </div>
 
     <button (click)="goBack()">Back</button>
 

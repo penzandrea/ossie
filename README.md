@@ -31,3 +31,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 Instructions for installing the server locally: https://docs.sonarqube.org/display/SONAR/Get+Started+in+Two+Minutes 
 Run it by eg. typing /Users/andrea/Documents/Ausbildung/JKU/jku_Sem_6/sonarqube/bin/macosx-universal-64/sonar.sh console (depending on path of installation) makes the server run at http://localhost:9000/
+Run it by eg. typing /Users/andrea/Documents/Ausbildung/JKU/jku_Sem_6/treffen_atzenhofer_ende_Sept/sonarqube-5.6.6/sonarqube-5.6.6/bin/macosx-universal-64/sonar.sh console (depending on path of installation) makes the server run at http://localhost:9000/

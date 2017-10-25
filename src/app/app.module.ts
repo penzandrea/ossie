@@ -22,6 +22,8 @@ import { FactorsComponent } from './factors/factors.component';
 import { FactorsServiceService} from './factors-service.service';
 import { ProjectsComponent } from './projects/projects.component';
 import { ProjectsService} from './projects.service';
+import { IssuesService} from './issues.service';
+
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 
 
@@ -62,7 +64,7 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
 
     ],
   providers: [BearsService,
-  AspectsService, FactorsServiceService, ProjectsService],
+  AspectsService, FactorsServiceService, ProjectsService, IssuesService],
   bootstrap: [AppComponent],
 
 })
