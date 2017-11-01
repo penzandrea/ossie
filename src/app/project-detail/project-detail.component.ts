@@ -41,13 +41,17 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
   //states = states;
   issues: Issue[];
   errorMessage: string;
+  groupedResults: Array<Object>;
+  groupByIndex = 2;
+
+
 
 
 
   constructor(private fb: FormBuilder,
       private projectsService: ProjectsService,
-              private issuesService: IssuesService,
-              private route: ActivatedRoute,
+      private issuesService: IssuesService,
+      private route: ActivatedRoute,
       private location: Location,
       private router: Router
   ) {
@@ -71,7 +75,8 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
   showIssues() {
     console.log('Show Issues');
     this.issuesShown = true;
-    this.getIssues();
+    //this.getIssues();
+
   }
 
   getIssues() {
@@ -83,8 +88,10 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
         .subscribe(
             issues => this.issues = issues
         );
+   // this.groupedResults = this.groupArrayBy(this.issues, this.groupByIndex);
 
-   // this.issuesService.getAllIssues()
+
+    // this.issuesService.getAllIssues()
    //      .subscribe(
    //          issues => this.issues = issues,
    //          error => this.errorMessage = <any>error);
@@ -93,7 +100,41 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
      users => console.log('users', users),
      error => console.error('error', error));*/
 
+    // transform results into grouped results
+    // you can easily extract this into a function and just pass your results in and the array index you want to group on
+
   }
+
+  /** Transforms an array of arrays into an array of grouped objects
+   *
+   * @param {Array} list - The array of arrays to tranform into groups.
+   * @param {int} groupByIndex - The index of the element to group on.
+   */
+  groupArrayBy(list, groupByIndex) {
+    // create a map to hold groups with their corresponding results
+    const map = new Map();
+    list.forEach((item) => {
+      const key = item[groupByIndex];
+      if (!map.has(key)) {
+        map.set(key, [item]);
+      } else {
+        map.get(key).push(item);
+      }
+    });
+
+    // convert map back to a simple array of objects
+    let groups: Array<Object> = Array.from(map, x => this.addGroup(x[0], x[1]) );
+
+    // output groups to the console for demostration
+    console.log("map = ", map);
+    console.log("groups = ", groups);
+
+    return groups;
+  }
+  addGroup(key, value) {
+    return { "key": key, "value": value };
+  }
+
   onSubmit() {
     this.project = this.prepareSaveProject();
     this.projectsService.updateProject(this.project.id, this.project.name, this.project.sonarkey).subscribe(/* error handling */);

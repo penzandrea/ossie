@@ -16,16 +16,15 @@ import {FileSelectDirective} from "ng2-file-upload/ng2-file-upload";
 import {BearCreateComponentComponent} from "./bear-create-component/bear-create-component.component";
 import {BearCreateComponent} from "./bear-create/bear-create.component";
 import {HeroFormComponent} from "./hero-form.component";
-import {MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule,  MdDialogModule,  MdFormFieldModule, MdSelectModule, MdListModule} from "@angular/material";
+import {MdButtonModule, MdCardModule, MdMenuModule, MdToolbarModule, MdIconModule,  MdDialogModule,  MdFormFieldModule, MdSelectModule, MdListModule, MatExpansionModule} from "@angular/material";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FactorsComponent } from './factors/factors.component';
 import { FactorsServiceService} from './factors-service.service';
 import { ProjectsComponent } from './projects/projects.component';
 import { ProjectsService} from './projects.service';
 import { IssuesService} from './issues.service';
-
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
-
+import { IssuesGoupedByRulesComponent } from './issues-gouped-by-rules/issues-gouped-by-rules.component';
 
 @NgModule({
   imports: [
@@ -44,7 +43,8 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
     MdToolbarModule,
     MdDialogModule,
     MdFormFieldModule,
-    MdIconModule
+    MdIconModule,
+    MatExpansionModule
   ],
     declarations: [
     AppComponent,
@@ -61,6 +61,7 @@ import { ProjectDetailComponent } from './project-detail/project-detail.componen
     FactorsComponent,
     ProjectsComponent,
     ProjectDetailComponent,
+    IssuesGoupedByRulesComponent,
 
     ],
   providers: [BearsService,

@@ -1,0 +1,24 @@
+issues-gouped-by-rules component
+
+<div *ngFor="let group of groupedResults" class='indent'>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <strong>{{group[0]}}</strong>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <pre *ngFor="let result of group[1]" class='dataResult'>{{result.message}}</pre>
+
+
+  </mat-expansion-panel>
+</div>
+
+
+<!--<div *ngFor="let group of groupedResults" class='indent'>
+  <strong>{{group[0]}}</strong>
+
+  <pre *ngFor="let result of group[1]" class='dataResult'>{{result.key}}</pre>
+
+</div>-->
+
