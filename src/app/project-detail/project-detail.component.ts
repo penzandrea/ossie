@@ -37,7 +37,11 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
 @Input() project: Project;
 
   projectForm: FormGroup;
-  issuesShown: boolean;
+  rulesShown: boolean;
+  severityShown: boolean;
+  componentsShown: boolean;
+  hallo: boolean;
+
   //states = states;
   issues: Issue[];
   errorMessage: string;
@@ -72,13 +76,23 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
     });
   }
 
-  showIssues() {
+  showRules() {
     console.log('Show Issues');
-    this.issuesShown = true;
+    this.rulesShown = !this.rulesShown;
     //this.getIssues();
 
   }
+  showSeverity() {
+    this.severityShown = !this.severityShown;
+    //this.getIssues();
+  }
+  showComponents() {
+    this.componentsShown = !this.componentsShown;
+    this.hallo = !this.hallo;
+    console.log('show');
+    console.log(this.componentsShown);
 
+  }
   getIssues() {
     // Retrieve posts from the API
 
@@ -180,8 +194,12 @@ export class ProjectDetailComponent implements OnInit, OnChanges {
 
   setup(){
       console.log('setup');
-      this.issuesShown = false;
-      this.route.paramMap
+      this.rulesShown = false;
+    this.severityShown = false;
+    this.componentsShown = false;
+    this.hallo = false;
+
+    this.route.paramMap
       .switchMap((params: ParamMap) =>
         this.projectsService.getProject(Number(params.get('id'))))
       .subscribe(

@@ -14,18 +14,15 @@ export class IssuesGoupedByRulesComponent implements OnInit {
 
   issues: Issue[];
   groupedResults: Object;
-  groupByIndex = 2;
 
   constructor(
 
               private issuesService: IssuesService,
               private route: ActivatedRoute,
-
-
   ) {
     this.route.paramMap
         .switchMap((params: ParamMap) =>
-            this.issuesService.getIssuesGroupedByRule(Number(params.get('id'))))
+            this.issuesService.getIssuesGroupedByFeature(Number(params.get('id')),"component"))
         .subscribe(
             issues => this.groupedResults = issues
         );
@@ -33,10 +30,7 @@ export class IssuesGoupedByRulesComponent implements OnInit {
   ngOnInit() {
 
   }
-  /*ngAfterContentInit(){
-    this.groupedResults = this.groupArrayBy(this.issues, this.groupByIndex);
 
-  }*/
 
   /** Transforms an array of arrays into an array of grouped objects
    *

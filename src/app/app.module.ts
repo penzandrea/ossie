@@ -25,6 +25,8 @@ import { ProjectsService} from './projects.service';
 import { IssuesService} from './issues.service';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { IssuesGoupedByRulesComponent } from './issues-gouped-by-rules/issues-gouped-by-rules.component';
+import { IssuesGoupedBySeverityComponent } from './issues-gouped-by-severity/issues-gouped-by-severity.component';
+import { IssuesGoupedByComponentsComponent } from './issues-gouped-by-components/issues-gouped-by-components.component';
 
 @NgModule({
   imports: [
@@ -62,6 +64,8 @@ import { IssuesGoupedByRulesComponent } from './issues-gouped-by-rules/issues-go
     ProjectsComponent,
     ProjectDetailComponent,
     IssuesGoupedByRulesComponent,
+    IssuesGoupedBySeverityComponent,
+    IssuesGoupedByComponentsComponent,
 
     ],
   providers: [BearsService,
