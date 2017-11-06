@@ -24,9 +24,12 @@ import { ProjectsComponent } from './projects/projects.component';
 import { ProjectsService} from './projects.service';
 import { IssuesService} from './issues.service';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
+import { ProjectDetailIssuesPipeComponent } from './project-detail-issues-pipe/project-detail-issues-pipe.component';
+
 import { IssuesGoupedByRulesComponent } from './issues-gouped-by-rules/issues-gouped-by-rules.component';
 import { IssuesGoupedBySeverityComponent } from './issues-gouped-by-severity/issues-gouped-by-severity.component';
 import { IssuesGoupedByComponentsComponent } from './issues-gouped-by-components/issues-gouped-by-components.component';
+import { AspectDrilldownLevel0Component } from './aspect-drilldown-level-0/aspect-drilldown-level-0.component';
 
 @NgModule({
   imports: [
@@ -62,10 +65,11 @@ import { IssuesGoupedByComponentsComponent } from './issues-gouped-by-components
     HeroFormComponent,
     FactorsComponent,
     ProjectsComponent,
-    ProjectDetailComponent,
+    ProjectDetailComponent, ProjectDetailIssuesPipeComponent,
     IssuesGoupedByRulesComponent,
     IssuesGoupedBySeverityComponent,
     IssuesGoupedByComponentsComponent,
+    AspectDrilldownLevel0Component,
 
     ],
   providers: [BearsService,

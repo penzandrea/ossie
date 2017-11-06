@@ -1,0 +1,38 @@
+<p>
+    aspect-drilldown-level-0 works!
+</p>
+
+<!--<div *ngFor="let aspect of aspects" class='indent'>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <strong>{{aspect.name}}</strong>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        &lt;!&ndash;
+            <pre *ngFor="let result of group[1]" class='dataResult'>{{result.message}}</pre>
+        &ndash;&gt;
+
+
+    </mat-expansion-panel>
+</div>-->
+
+<h2>
+FirstLevel</h2>
+
+<div *ngFor="let aspectLevelOne of firstLevelAspects" class='indent'>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <strong>{{aspectLevelOne.name}}</strong>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <!--
+            <pre *ngFor="let result of group[1]" class='dataResult'>{{result.message}}</pre>
+        -->
+
+
+    </mat-expansion-panel>
+</div>

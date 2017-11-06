@@ -21,7 +21,7 @@ export class IssuesGoupedByComponentsComponent  {
   ) {
     this.route.paramMap
         .switchMap((params: ParamMap) =>
-            this.issuesService.getIssuesGroupedByFeature(Number(params.get('id')),"rule"))
+            this.issuesService.getIssuesGroupedByFeature(Number(params.get('id')),"component"))
         .subscribe(
             issues => this.groupedResults = issues
         );

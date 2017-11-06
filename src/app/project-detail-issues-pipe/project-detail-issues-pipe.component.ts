@@ -16,11 +16,11 @@ import {Issue} from "../model/issue";
 
 
 @Component({
-    selector: 'app-project-detail',
-    templateUrl: './project-detail.component.html',
-    styleUrls: ['./project-detail.component.css']
+    selector: 'app-project-detail-issues-pipe',
+    templateUrl: './project-detail-issues-pipe.component.html',
+    styleUrls: ['./project-detail-issues-pipe.component.css']
 })
-export class ProjectDetailComponent implements OnInit {
+export class ProjectDetailIssuesPipeComponent implements OnInit {
 
 //  export class ProjectDetailComponent {
 

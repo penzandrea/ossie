@@ -52,11 +52,19 @@ export class IssuesService {
             .catch(this.handleError);
     }
 
-    getIssuesGroupedByFeature(id: number, feature: string) {
+
+    getIssuesGroupedByRule(id: number) {
         this.setup();
-        return this.http.get(this.issuesUrl + '/' + id + '/issues').map((res) => this.extractDataByFeature(res, feature))
+        //console.log('getIssues(id:number)');
+
+        //console.log('getIssue' + id);
+
+
+
+        return this.http.get(this.issuesUrl + '/' + id + '/issues').map((res) => this.extractDataGroupedByRule(res, "rule"))
             .catch(this.handleError);
     }
+
     updateIssue(id: number, name: string, sonarkey: string) {
         let headers = new Headers({'Content-Type': 'application/json'});
         //let options = new RequestOptions({ headers: headers });
@@ -65,6 +73,25 @@ export class IssuesService {
         //return this.http.put(this. issuesUrl + '/' + id, { id, name, sonarkey }, options).map(res => res.json());
         return null;
     }
+    addGroup(key, value):any {
+        return {"key": key, "value": value};
+    }
+
+
+
+    getIssuesGroupedBySeverity(id: number) {
+        this.setup();
+        return this.http.get(this.issuesUrl + '/' + id + '/issues').map(this.extractDataGroupedBySeverity)
+    .catch(this.handleError);
+    }
+
+
+    getIssuesGroupedByComponent(id: number) {
+        this.setup();
+        return this.http.get(this.issuesUrl + '/' + id + '/issues').map(this.extractDataGroupedByComponent)
+            .catch(this.handleError);
+    }
+
 
     extractDataByFeature(res: Response, feature: string) {
         let body = res.json();
@@ -77,6 +104,7 @@ export class IssuesService {
 
         body.issues.forEach((item) => {
             const key = item[feature];
+
             if (!xyz.has(key)) {
                 xyz.set(key, [item]);
             } else {
@@ -93,6 +121,7 @@ export class IssuesService {
 
         // convert map back to a simple array of objects
         let groups = Array.from(xyz);
+
         //let groupings = JSON.stringify(xyz);
         let groupings = JSON.stringify(groups);
 
@@ -100,11 +129,81 @@ export class IssuesService {
         console.log("map = ", xyz);
         console.log("groups = ", groups);
         console.log("typeof = ", typeof groups);
+
         //console.log("groupings = ", groupings);
+
         //console.log(groups);
         return groups;
 
     }
+
+
+    extractDataGroupedByRule(res: Response, feature: string) {
+        let body = res.json();
+        console.log("-----------extractDataGroupedByRuleextractDataGroupedByRule--------");
+
+        console.log(body.issues);
+        console.log(feature);
+
+        //return body.issues || {};
+
+
+        // create a map to hold groups with their corresponding results
+        const xyz = new Map();
+
+        console.log("1");
+
+        //console.log(xyz);
+
+        body.issues.forEach((item) => {
+             const key = item[feature];
+
+            //const key = item.rule;
+/*            console.log("item ");
+            console.log(item);
+            console.log("item.rule");
+            console.log(item.rule);
+            console.log("KEY "+ key);*/
+            if (!xyz.has(key)) {
+                xyz.set(key, [item]);
+            } else {
+                xyz.get(key).push(item);
+            }
+        });
+
+        xyz.forEach((value, key) => {
+            key = "Dr" + key;
+        });
+            /*            console.log("item ");
+             console.log(item);
+             console.log("item.rule");
+             console.log(item.rule);
+             console.log("KEY "+ key);*/
+
+
+        console.log("2");
+
+        console.log(xyz);
+
+        // convert map back to a simple array of objects
+        let groups = Array.from(xyz);
+
+        //let groupings = JSON.stringify(xyz);
+        let groupings = JSON.stringify(groups);
+
+        // output groups to the console for demostration
+        console.log("map = ", xyz);
+        console.log("groups = ", groups);
+        console.log("typeof = ", typeof groups);
+
+        //console.log("groupings = ", groupings);
+
+        //console.log(groups);
+        return groups;
+
+    }
+
+
 
     private extractData(res: Response) {
         let body = res.json();
@@ -115,6 +214,79 @@ export class IssuesService {
         // no body.data!
         return body.issues || {};
     }
+    extractDataGroupedBySeverity(res: Response) {
+        let body = res.json();
+        console.log("-----------Severity--------");
+
+        console.log(body.issues);
+
+        const xyz = new Map();
+
+        console.log("1");
+
+
+        body.issues.forEach((item) => {
+            const key = item.severity;
+            /*            console.log("item ");
+             console.log(item);
+             console.log("item.rule");
+             console.log(item.rule);
+             console.log("KEY "+ key);*/
+            if (!xyz.has(key)) {
+                xyz.set(key, [item]);
+            } else {
+                xyz.get(key).push(item);
+            }
+        });
+
+        console.log("2");
+        console.log(xyz);
+
+        // convert map back to a simple array of objects
+        let groups = Array.from(xyz);
+
+        //let groupings = JSON.stringify(xyz);
+        let groupings = JSON.stringify(groups);
+
+        // output groups to the console for demostration
+        console.log("map = ", xyz);
+        console.log("groups = ", groups);
+        console.log("typeof = ", typeof groups);
+
+        //console.log("groupings = ", groupings);
+
+        //console.log(groups);
+        return groups;
+
+    }
+
+
+    extractDataGroupedByComponent(res: Response) {
+        let body = res.json();
+        console.log("-----------Component--------");
+
+        const xyz = new Map();
+
+        body.issues.forEach((item) => {
+            const key = item.component;
+
+            if (!xyz.has(key)) {
+                xyz.set(key, [item]);
+            } else {
+                xyz.get(key).push(item);
+            }
+        });
+
+        // convert map back to a simple array of objects
+        let groups = Array.from(xyz);
+
+        //let groupings = JSON.stringify(xyz);
+        let groupings = JSON.stringify(groups);
+
+        return groups;
+
+    }
+
 
     private handleError(error: Response | any) {
         console.log('error');
