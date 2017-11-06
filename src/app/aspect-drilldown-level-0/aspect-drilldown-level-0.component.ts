@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AspectsService} from "../aspects.service";
 import {Aspect} from "../model/aspect";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
+import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'app-aspect-drilldown-level-0',
@@ -10,8 +11,10 @@ import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 })
 export class AspectDrilldownLevel0Component implements OnInit {
   aspects: Aspect[];
-  aspectFirstHierarchy:Aspect[] = [new Aspect(1111, "", "", null)];
-  firstLevelAspects: Aspect[];
+  aspectFirstHierarchy:Aspect[];
+  //aspectFirstHierarchy:Aspect[] = [new Aspect(1111, "", "", null)];
+  children: Aspect[];
+  allAspects: Aspect[];
   //childrenArray: Aspect[];
 
 
@@ -24,29 +27,54 @@ export class AspectDrilldownLevel0Component implements OnInit {
   ) {
     this.aspectsService.getFirstLevelAspects()
         .subscribe(
-            aspects => this.firstLevelAspects = aspects,
+            aspects => this.aspectFirstHierarchy = aspects,
             error => this.errorMessage = <any>error);
 
     // Get the risk from the server
     this.aspectsService.getAllAspectsFromServer();
     // subscribe to subject
     this.aspectsService.aspectsSubject.subscribe(
-        data => { aspectsService.getChildrenForEachProcess(data).subscribe(
-            childrenArray => {
-              console.log(childrenArray); // [[Task], [Task], [Task]];
+        allAspects => {
+          this.allAspects = allAspects;
+          aspectsService.getChildrenForEachAspect(allAspects).subscribe(
+            children => {
+              this.children = children;
+              console.log(children); // [[Task], [Task], [Task]];
+
               // In case error occurred e.g. for the process at position 1,
               // Output will be: [[Task], null, [Task]];
-              console.log(this.aspectFirstHierarchy);
+              //console.log(this.aspectFirstHierarchy);
+              for (let key in this.allAspects) {
+                //let tudldu = [ new Aspect("1111", "test", "test", null) ];
+                this.allAspects[key].children = null;
+              }
+              console.log("++++++++");
+              console.log(this.allAspects);
+              console.log("++++++++");
+
+              console.log("CCCCCCCCCCCHHHHHIIIILLLLDDDDRRREEENNN");
+
+              children.forEach((child, h) => console.log(children[h]));
+
+              console.log("AAAAAALLLLLLlAAAASSSSPPPEEECCCTTTSSS");
+              this.allAspects.forEach((aspect, i) => console.log(this.allAspects[i]));
+
               // If you want to assign tasks to each process after all calls are finished:
-              childrenArray.forEach((tasks, i) => this.aspectFirstHierarchy[i].children = childrenArray[i]);
+              children.forEach((children, i) => {
+                var d = new Aspect(1,"","",null);
+                d.copyInto(children[i]);
+                this.allAspects[i].children = children[i];
+              })
+
+              console.log("FINIIIIIISH");
+              console.log(this.allAspects);
+
+
             }
         );
         });
 
-    console.log(this.aspectsService.allAspects);
 
-    console.log("------------------------------------------------------------");
-    console.log(this.aspectFirstHierarchy);
 
 
 
@@ -65,6 +93,10 @@ export class AspectDrilldownLevel0Component implements OnInit {
   }
 
   ngOnInit() {
+    console.log("INIT");
+
+    console.log(this.allAspects);
+
   }
 
 }

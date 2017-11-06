@@ -33,7 +33,7 @@ export class AspectsService {
         console.log(this.aspectsUrl + '/' + aspect.id + '/children');
 
         return this.http.get(this.aspectsUrl + '/' + aspect.id + '/children')
-            .map(this.extractData)
+            .map(this.extractDataAddChildren)
             .catch(this.handleError);
     };
 
@@ -67,7 +67,7 @@ export class AspectsService {
         return body.aspectItemInfoDtos || {};
     }
 
-    getChildrenForEachProcess(alliAspects: Aspect[]) {
+    getChildrenForEachAspect(alliAspects: Aspect[]) {
         console.log('this.allAspects START');
         this.allAspects = alliAspects;
         console.log("this.allAspects ready for mapping?");
@@ -87,16 +87,16 @@ export class AspectsService {
 
         });
         let childrenObservables = this.allAspects.map((aspect, aspectIdx) => {
-         return this.getAspectChildren(aspect)
-         .map(children => {
-         //this.allAspects[aspectIdx].children = children; // assign children to each aspect as they arrive
-             console.log(children);
-         return children;
-         })
-         .catch((error: any) => {
-         console.error('Error loading children for aspect: ' + aspect, 'Error: ', error);
-         return Observable.of(null); // In case error occurs, we need to return Observable, so the stream can continue
-         });
+             return this.getAspectChildren(aspect)
+             .map(children => {
+             //this.allAspects[aspectIdx].children = children; // assign children to each aspect as they arrive
+                 console.log(children);
+                return children;
+             })
+             .catch((error: any) => {
+                console.error('Error loading children for aspect: ' + aspect, 'Error: ', error);
+                return Observable.of(null); // In case error occurs, we need to return Observable, so the stream can continue
+             });
          });
                /*let childrenObservables = this.allAspects.map(aspect, aspectIdx) => {
                     return this.getAspectChildren(aspect)

@@ -12,5 +12,10 @@ export class Aspect {
         this.children = children;
     }
 
-
+    copyInto(json: any){
+            this.id = json.id;
+        this.name = json.name;
+        this.description = json.description;
+        this.children = null;
+    }
 }
