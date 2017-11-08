@@ -29,8 +29,8 @@ export class AspectsService {
     }
 
     getAspectChildren(aspect: Aspect){
-        console.log('TEST'+ aspect.id +'TEST');
-        console.log(this.aspectsUrl + '/' + aspect.id + '/children');
+        //console.log('TEST'+ aspect.id +'TEST');
+        //console.log(this.aspectsUrl + '/' + aspect.id + '/children');
 
         return this.http.get(this.aspectsUrl + '/' + aspect.id + '/children')
             .map(this.extractDataAddChildren)
@@ -39,13 +39,13 @@ export class AspectsService {
 
     extractDataLevels(res: Response, str: string) {
         //console.log('extractData ASPECT RAW Start');
-        console.log('extractDataLevelsextractDataLevelsextractDataLevels');
+        //console.log('extractDataLevelsextractDataLevelsextractDataLevels');
 
-        console.log(res);
+        //console.log(res);
         //console.log('extractData ASPECT RAW End');
 
         let body = res.json();
-        console.log(body.aspectItemInfoDtos + 'children');
+        //console.log(body.aspectItemInfoDtos + 'children');
 
         //console.log('extractData ASPECT Start');
         //console.log(body);
@@ -68,33 +68,33 @@ export class AspectsService {
     }
 
     getChildrenForEachAspect(alliAspects: Aspect[]) {
-        console.log('this.allAspects START');
+        //console.log('this.allAspects START');
         this.allAspects = alliAspects;
-        console.log("this.allAspects ready for mapping?");
-        console.log(this.allAspects);
+        //console.log("this.allAspects ready for mapping?");
+        //console.log(this.allAspects);
         //console.log(alliAspects);
         //console.log(alliAspects[0]);
         let aspchil = this.getAspectChildren(alliAspects[0]);
-        console.log(aspchil);
+        //console.log(aspchil);
 
-        console.log('this.allAspects END');
+        //console.log('this.allAspects END');
 
 
         var a = ["a", "b", "c"];
         a.forEach(function(entry, index) {
-            console.log(entry[index]);
-            console.log(entry[index]);
+            //console.log(entry[index]);
+            //console.log(entry[index]);
 
         });
         let childrenObservables = this.allAspects.map((aspect, aspectIdx) => {
              return this.getAspectChildren(aspect)
              .map(children => {
              //this.allAspects[aspectIdx].children = children; // assign children to each aspect as they arrive
-                 console.log(children);
+                 //console.log(children);
                 return children;
              })
              .catch((error: any) => {
-                console.error('Error loading children for aspect: ' + aspect, 'Error: ', error);
+                //console.error('Error loading children for aspect: ' + aspect, 'Error: ', error);
                 return Observable.of(null); // In case error occurs, we need to return Observable, so the stream can continue
              });
          });
@@ -140,7 +140,7 @@ export class AspectsService {
 
 
     getAspect(id: number) {
-        console.log('getAspecttt' + id);
+        //console.log('getAspecttt' + id);
 
         return this.http.get(this.aspectsUrl + '/' + id).map(res => res.json());
     }
@@ -252,27 +252,31 @@ export class AspectsService {
     }
 
 
-    private extractDataAddChildren(res: Response) {
-        console.log('ADDCHILDREN');
-        // console.log(res);
+    private extractDataAddChildren(res: Response): Aspect[] {
+        //console.log('ADDCHILDREN');
         // console.log('extractData ASPECT RAW End');
 
         let body = res.json();
+         //console.log(body);
+
         /*        body.aspectItemInfoDtos.map(thing) => {
 
          }*/
-        for (let key in body.aspectItemInfoDtos) {
+        let aspectes: Aspect[] = [];
+        body.aspectItemInfoDtos.forEach(( singleaspect, k) => {
+            aspectes[k] = new Aspect (body.aspectItemInfoDtos[k].id,body.aspectItemInfoDtos[k].name,body.aspectItemInfoDtos[k].description,body.aspectItemInfoDtos[k].children);
             //let tudldu = [ new Aspect("1111", "test", "test", null) ];
-            body.aspectItemInfoDtos[key].children = null;
-            console.log(body.aspectItemInfoDtos[key]);
-        }
+            //body.aspectItemInfoDtos[key].children = null;
+            //console.log(body.aspectItemInfoDtos[key]);
+        });
+        //console.log(aspectes);
 
         // console.log('extractData ASPECT Start');
         // console.log(body);
         // console.log('extractData ASPECT End');
 
         // no body.data!
-        return body.aspectItemInfoDtos || {};
+        return aspectes || [new Aspect(999,"","",null)];
     }
 
     private extractData(res: Response) {
@@ -299,7 +303,7 @@ export class AspectsService {
         } else {
             errMsg = error.message ? error.message : error.toString();
         }
-        console.error(errMsg);
+        //console.error(errMsg);
         return Observable.throw(errMsg);
     }
 }

@@ -13,8 +13,11 @@ export class AspectDrilldownLevel0Component implements OnInit {
   aspects: Aspect[];
   aspectFirstHierarchy:Aspect[];
   //aspectFirstHierarchy:Aspect[] = [new Aspect(1111, "", "", null)];
-  children: Aspect[];
+  children: any;
   allAspects: Aspect[];
+  tree: Aspect[];
+  asp: Aspect;
+
   //childrenArray: Aspect[];
 
 
@@ -32,6 +35,7 @@ export class AspectDrilldownLevel0Component implements OnInit {
 
     // Get the risk from the server
     this.aspectsService.getAllAspectsFromServer();
+
     // subscribe to subject
     this.aspectsService.aspectsSubject.subscribe(
         allAspects => {
@@ -39,63 +43,30 @@ export class AspectDrilldownLevel0Component implements OnInit {
           aspectsService.getChildrenForEachAspect(allAspects).subscribe(
             children => {
               this.children = children;
-              console.log(children); // [[Task], [Task], [Task]];
-
-              // In case error occurred e.g. for the process at position 1,
-              // Output will be: [[Task], null, [Task]];
-              //console.log(this.aspectFirstHierarchy);
-              for (let key in this.allAspects) {
-                //let tudldu = [ new Aspect("1111", "test", "test", null) ];
-                this.allAspects[key].children = null;
-              }
-              console.log("++++++++");
-              console.log(this.allAspects);
-              console.log("++++++++");
-
-              console.log("CCCCCCCCCCCHHHHHIIIILLLLDDDDRRREEENNN");
-
-              children.forEach((child, h) => console.log(children[h]));
-
-              console.log("AAAAAALLLLLLlAAAASSSSPPPEEECCCTTTSSS");
-              this.allAspects.forEach((aspect, i) => console.log(this.allAspects[i]));
 
               // If you want to assign tasks to each process after all calls are finished:
-              children.forEach((children, i) => {
-                var d = new Aspect(1,"","",null);
-                d.copyInto(children[i]);
-                this.allAspects[i].children = children[i];
-              })
-
-              console.log("FINIIIIIISH");
-              console.log(this.allAspects);
+              children.forEach((child, i) => {
+                this.allAspects[i].children = Aspect.fromJSONArray(children[i]);
+              });
+              console.log("EEEEEEEEEEEEEEEEEEE");
+              this.asp = new Aspect (3, "", "", null);
+              this.tree = Aspect.aspectFromId(this.allAspects, 411);
+              console.log("FFFFFFFFFFFFFFFFFFF");
+              console.log(this.tree);
+              console.log("FFFFFFFFFFFFFFFFFFF");
 
 
             }
-        );
-        });
+          );
 
 
+        }
+  );
 
-
-
-
-    /*        this.aspectsService.getChildrenForEachProcess().subscribe(
-                tasksArray => {
-                  console.log(tasksArray); // [[Task], [Task], [Task]];
-                  // In case error occurred e.g. for the process at position 1,
-                  // Output will be: [[Task], null, [Task]];
-
-                  // If you want to assign tasks to each process after all calls are finished:
-                  tasksArray.forEach((tasks, i) => this.processes[i].tasks = tasksArray[i]);
-                }
-            );*/
 
   }
 
   ngOnInit() {
-    console.log("INIT");
-
-    console.log(this.allAspects);
 
   }
 
