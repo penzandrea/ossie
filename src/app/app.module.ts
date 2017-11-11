@@ -30,6 +30,7 @@ import { IssuesGoupedByRulesComponent } from './issues-gouped-by-rules/issues-go
 import { IssuesGoupedBySeverityComponent } from './issues-gouped-by-severity/issues-gouped-by-severity.component';
 import { IssuesGoupedByComponentsComponent } from './issues-gouped-by-components/issues-gouped-by-components.component';
 import { AspectDrilldownLevel0Component } from './aspect-drilldown-level-0/aspect-drilldown-level-0.component';
+import { TreeModule } from 'angular-tree-component';
 
 @NgModule({
   imports: [
@@ -49,7 +50,8 @@ import { AspectDrilldownLevel0Component } from './aspect-drilldown-level-0/aspec
     MdDialogModule,
     MdFormFieldModule,
     MdIconModule,
-    MatExpansionModule
+    MatExpansionModule,
+    TreeModule
   ],
     declarations: [
     AppComponent,

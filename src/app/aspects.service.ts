@@ -67,7 +67,11 @@ export class AspectsService {
         return body.aspectItemInfoDtos || {};
     }
 
-    getChildrenForEachAspect(alliAspects: Aspect[]) {
+    getChildren(id: number) {
+
+    }
+
+        getChildrenForEachAspect(alliAspects: Aspect[]) {
         //console.log('this.allAspects START');
         this.allAspects = alliAspects;
         //console.log("this.allAspects ready for mapping?");
@@ -269,25 +273,17 @@ export class AspectsService {
             //body.aspectItemInfoDtos[key].children = null;
             //console.log(body.aspectItemInfoDtos[key]);
         });
-        //console.log(aspectes);
 
-        // console.log('extractData ASPECT Start');
-        // console.log(body);
-        // console.log('extractData ASPECT End');
 
         // no body.data!
         return aspectes || [new Aspect(999,"","",null)];
     }
 
     private extractData(res: Response) {
-        // console.log('extractData ASPECT RAW Start');
-        // console.log(res);
-        // console.log('extractData ASPECT RAW End');
+
 
         let body = res.json();
-        // console.log('extractData ASPECT Start');
-        // console.log(body);
-        // console.log('extractData ASPECT End');
+
 
         // no body.data!
         return body.aspectItemInfoDtos || {};

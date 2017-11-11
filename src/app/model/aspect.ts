@@ -119,6 +119,7 @@ export class Aspect {
 
         console.log("TREE");
         console.log(tree);
+        //console.log(tree.);
 
         return tree;
 
