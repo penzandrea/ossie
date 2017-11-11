@@ -12,6 +12,7 @@ import {ProjectsComponent} from "../projects/projects.component";
 import {ProjectDetailComponent} from "../project-detail/project-detail.component";
 import {ProjectDetailIssuesPipeComponent} from "../project-detail-issues-pipe/project-detail-issues-pipe.component"
 import {AspectDrilldownLevel0Component} from "../aspect-drilldown-level-0/aspect-drilldown-level-0.component";
+import {AspectDrilldownLevel1Component} from "../aspect-drilldown-level-1/aspect-drilldown-level-1.component";
 
 
 // Define the routes
@@ -33,6 +34,8 @@ const ROUTES = [
     component: ProjectsComponent
   },
   { path: 'aspect-drilldown-0', component: AspectDrilldownLevel0Component },
+  { path: 'aspect-drilldown-1', component: AspectDrilldownLevel1Component },
+
 
   { path: 'project/:id', component: ProjectDetailComponent },
   { path: 'project-pipe/:id', component: ProjectDetailIssuesPipeComponent },

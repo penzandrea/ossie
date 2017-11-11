@@ -31,6 +31,7 @@ import { IssuesGoupedBySeverityComponent } from './issues-gouped-by-severity/iss
 import { IssuesGoupedByComponentsComponent } from './issues-gouped-by-components/issues-gouped-by-components.component';
 import { AspectDrilldownLevel0Component } from './aspect-drilldown-level-0/aspect-drilldown-level-0.component';
 import { TreeModule } from 'angular-tree-component';
+import { AspectDrilldownLevel1Component } from './aspect-drilldown-level-1/aspect-drilldown-level-1.component';
 
 @NgModule({
   imports: [
@@ -72,6 +73,7 @@ import { TreeModule } from 'angular-tree-component';
     IssuesGoupedBySeverityComponent,
     IssuesGoupedByComponentsComponent,
     AspectDrilldownLevel0Component,
+    AspectDrilldownLevel1Component,
 
     ],
   providers: [BearsService,

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {AspectsService} from "../aspects.service";
 import {Aspect} from "../model/aspect";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
-import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-component';
+import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions, TreeNode } from 'angular-tree-component';
+import {Http, Response, RequestOptions, Headers} from '@angular/http';
 
 
 @Component({
@@ -65,7 +66,23 @@ export class AspectDrilldownLevel0Component implements OnInit {
         }
     ];
     options1: ITreeOptions = {
-        getChildren: () => new Promise((resolve, reject) => { })
+        getChildren: (node:TreeNode) => new Promise((resolve, reject) => {
+
+            let aspectsChildrenUrl =  'http://localhost:4200/aspects' + node.data.id + '/children';
+            console.log('aspectsChildrenUrl ' + aspectsChildrenUrl);
+            //let apiURL = `${this.apiRoot}?term=${term}&media=music&limit=20`;
+            this.http.get(aspectsChildrenUrl)
+                .toPromise()
+                .then(
+                    res => { // Success
+                        console.log(res.json());
+                        resolve();
+                    },
+                    msg => { // Error
+                        reject(msg);
+                    }
+                );
+        })
     };
 
     options0: ITreeOptions = {
@@ -104,6 +121,7 @@ export class AspectDrilldownLevel0Component implements OnInit {
   constructor(
       private aspectsService: AspectsService,
       private route: ActivatedRoute,
+      private http: Http
   ) {
       
     this.aspectsService.getFirstLevelAspects()
