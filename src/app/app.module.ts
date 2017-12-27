@@ -34,6 +34,8 @@ import { TreeModule } from 'angular-tree-component';
 import { AspectDrilldownLevel1Component } from './aspect-drilldown-level-1/aspect-drilldown-level-1.component';
 import { ProjectDetailFilterIssuesComponent } from "./project-detail-filter-issues/project-detail-filter-issues.component";
 import { ProjectDetailFilterIssuesComponent0 } from "./project-detail-filter-issues-0/project-detail-filter-issues-0.component";
+import { ProjectDetailFilterIssuesComponent1 } from "./project-detail-filter-issues-1/project-detail-filter-issues-1.component";
+import { IssueFilterPipeOne } from './filter/issue-filter-1.pipe';
 import { IssueFilterPipeZero } from './filter/issue-filter-0.pipe';
 import { IssueFilterPipe } from './filter/issue-filter.pipe';
 import { UniquePipe } from './filter/unique.pipe';
@@ -82,8 +84,10 @@ import { UniquePipe } from './filter/unique.pipe';
     AspectDrilldownLevel1Component,
     ProjectDetailFilterIssuesComponent,
     ProjectDetailFilterIssuesComponent0,
+    ProjectDetailFilterIssuesComponent1,
     IssueFilterPipe,
     IssueFilterPipeZero,
+    IssueFilterPipeOne,
     UniquePipe
     ],
   providers: [BearsService,
