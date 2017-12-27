@@ -1,7 +1,28 @@
 export class Issue {
 
 
-    constructor(
+        author: String;
+        component: String;
+        key: String;
+        line: number;
+        message: String;
+        project: String;
+        resolution: String;
+        rule: String;
+        severity: String;
+        status: String;
+        textRange: {
+            endLine: number;
+            endOffset: number;
+            startLine: number;
+            startOffset: number;
+        };
+        type: String;
+
+
+
+
+/*    constructor(
 
     public author: string,
     public component: string,
@@ -21,7 +42,7 @@ export class Issue {
     },
     public type: string
 
-    ){}
+    ){}*/
 }
 /*
 [

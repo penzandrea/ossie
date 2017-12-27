@@ -28,9 +28,6 @@ export class IssuesService {
 
             // In a real app: dispatch action to load the details here.
         });
-        console.log("SETUP");
-        console.log(this.projectID);
-
     }
 
     getAllIssues(): Observable<Issue[]> {
@@ -42,16 +39,27 @@ export class IssuesService {
             .catch(this.handleError);
     }
 
-    getIssues(id: number) {
+    getIssues(id: number): Observable<Issue[]> {
         this.setup();
         console.log('getIssues(id:number)');
 
         console.log('getIssue' + id);
+        console.log('!!!! getIssues ' + this.issuesUrl + id + '/issues');
 
-        return this.http.get(this.issuesUrl + '/' + id + '/issues').map((res) => this.extractData(res))
+        return this.http.get(this.issuesUrl + id + '/issues').map((res) => this.extractData(res))
             .catch(this.handleError);
     }
 
+    getIssuesFilters(id: number): Observable<Issue[]> {
+        this.setup();
+        console.log('getIssues(id:number)');
+
+        console.log('getIssue' + id);
+        console.log('!!!! getIssues ' + this.issuesUrl + id + '/issues');
+
+        return this.http.get(this.issuesUrl + id + '/issues').map((res) => this.extractData(res))
+            .catch(this.handleError);
+    }
 
     getIssuesGroupedByRule(id: number) {
         this.setup();
@@ -92,7 +100,12 @@ export class IssuesService {
             .catch(this.handleError);
     }
 
+    getIssuesGroupedByFeature(id: number, feature: string) {
+        this.setup();
 
+            return this.http.get(this.issuesUrl + '/' + id + '/issues').map((res) => this.extractDataByFeature(res, feature))
+            .catch(this.handleError);
+    }
     extractDataByFeature(res: Response, feature: string) {
         let body = res.json();
         console.log(body.issues);
@@ -130,9 +143,6 @@ export class IssuesService {
         console.log("groups = ", groups);
         console.log("typeof = ", typeof groups);
 
-        //console.log("groupings = ", groupings);
-
-        //console.log(groups);
         return groups;
 
     }
@@ -253,9 +263,6 @@ export class IssuesService {
         console.log("groups = ", groups);
         console.log("typeof = ", typeof groups);
 
-        //console.log("groupings = ", groupings);
-
-        //console.log(groups);
         return groups;
 
     }

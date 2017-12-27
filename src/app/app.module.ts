@@ -32,6 +32,12 @@ import { IssuesGoupedByComponentsComponent } from './issues-gouped-by-components
 import { AspectDrilldownLevel0Component } from './aspect-drilldown-level-0/aspect-drilldown-level-0.component';
 import { TreeModule } from 'angular-tree-component';
 import { AspectDrilldownLevel1Component } from './aspect-drilldown-level-1/aspect-drilldown-level-1.component';
+import { ProjectDetailFilterIssuesComponent } from "./project-detail-filter-issues/project-detail-filter-issues.component";
+import { ProjectDetailFilterIssuesComponent0 } from "./project-detail-filter-issues-0/project-detail-filter-issues-0.component";
+import { IssueFilterPipeZero } from './filter/issue-filter-0.pipe';
+import { IssueFilterPipe } from './filter/issue-filter.pipe';
+import { UniquePipe } from './filter/unique.pipe';
+
 
 @NgModule({
   imports: [
@@ -74,7 +80,11 @@ import { AspectDrilldownLevel1Component } from './aspect-drilldown-level-1/aspec
     IssuesGoupedByComponentsComponent,
     AspectDrilldownLevel0Component,
     AspectDrilldownLevel1Component,
-
+    ProjectDetailFilterIssuesComponent,
+    ProjectDetailFilterIssuesComponent0,
+    IssueFilterPipe,
+    IssueFilterPipeZero,
+    UniquePipe
     ],
   providers: [BearsService,
   AspectsService, FactorsServiceService, ProjectsService, IssuesService],

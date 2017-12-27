@@ -43,21 +43,21 @@
             [disabled]="projectForm.pristine" class="btn btn-success">Save</button> &nbsp;&ndash;&gt;
 </form>-->
 
-    <button (click)="showRules()">Show Rules</button>
+    <!--<button (click)="showRules()">Show Rules</button>
   <button (click)="showSeverity()">Show Severity</button>
-  <button (click)="showComponents()">Show Components</button>
+  <button (click)="showComponents()">Show Components</button>-->
 
 
-  <div *ngIf="componentsShown">
+  <!--<div *ngIf="componentsShown">-->
     <app-issues-gouped-by-components></app-issues-gouped-by-components>
 
-  </div>
+  <!--</div>-->
 
-  <div *ngIf="severityShown">
+  <!--<div *ngIf="severityShown">-->
     <app-issues-gouped-by-severity></app-issues-gouped-by-severity>
 
-  </div>
-  <div *ngIf="rulesShown">
+  <!--</div>-->
+  <!--<div *ngIf="rulesShown">-->
     <!--<h2>
       {{project.name | uppercase}} is my hero
     </h2>-->
@@ -98,4 +98,4 @@
 <p>Name untouched: {{ projectForm.get('name').untouched }}</p>-->
 
 
-</div>
+<!--</div>-->

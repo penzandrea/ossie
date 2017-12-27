@@ -12,110 +12,44 @@ export class Aspect {
         this.children = children;
     }
 
-    isEmpty(obj: Aspect) {
-    for(var prop in obj) {
-        if(obj.hasOwnProperty(prop))
-            return false;
-    }
 
-    return JSON.stringify(obj) === JSON.stringify({});
-}
-    static getFromBaseArray(baseArray: Aspect[], aspChildren: Aspect[]): Aspect[] {
-
-            console.log('childrenstart');
-        console.log(aspChildren);
-        console.log(typeof aspChildren);
-        aspChildren.forEach((a,h) => {console.log(typeof aspChildren[h]);})
-
-        console.log('BASEARRAYSTART');
-        console.log(baseArray);
-
-        baseArray.forEach((baseEntry, x) => {
-                aspChildren.forEach((aspChildEntry, y) => {
-                    if(baseEntry.id == aspChildEntry.id){
-                        aspChildren[y] = baseArray[x];
-                         console.log(baseArray[x].id);
-                        console.log(baseArray[x].children);
-
-                         console.log("DA HATS WAS");
-                         console.log(baseArray[x].id);
-                        // console.log(aspChildren[y]);
-                        //delete baseArray[x];
-                        if (x != -1) {
-                            console.log('delete' + baseArray[x].id);
-
-                            console.log("splice" + x);
-                            //baseArray.splice(x, 1);
-                        }
-                    }
-                });
-
-            });
-        baseArray.forEach((baseEntry, x) => {
-            aspChildren.forEach((aspChildEntry, y) => {
-                if(baseEntry.id == aspChildEntry.id){
-                    //delete baseArray[x];
-                    if (x != -1) {
-                        console.log('delete' + baseArray[x].id);
-
-                        console.log("splice" + x);
-                        //baseArray.splice(x, 1);
-                    }
-                }
-            });
-        });
-
-        // console.log("ODER NICHT");
-        //
-        //     console.log('return child array to add to '+)
-        //     console.log(aspChildren);
-        console.log('childrenend');
-        console.log(aspChildren);
-
-        console.log('BASEARRAYEND');
-        console.log(baseArray);
-
-            return aspChildren;
-    }
-    static aspectFromId(allAspArray: Aspect[], startNode: number): Aspect[] {
+    static generateTree(serverNodes: Aspect[], startNode: number): Aspect[] {
         let searchedAspChildren:Aspect[];
         let searchedAspChildrenwithChildren:Aspect[];
         let tree: Aspect[] = [new Aspect(4,"","",null)];
 
         console.log("FRESH");
-        console.log(allAspArray);
+        console.log(serverNodes);
 
-        allAspArray.forEach((asp, i) => {
+        // search for the one tree root aspect node
+        serverNodes.forEach((asp, i) => {
             if (asp.id == startNode) {
-                //topLevel
-                //console.log("asp");
-                console.log(asp);
 
+                // set tree root to be the defined startnode
                 tree[0] = asp;
-                //delete allAspArray[i];
-                //var index = myArray.indexOf(key, 0);
-                if (i != -1) {
-                   //allAspArray.splice(i, 1);
-                }
-                //incomplete children from first level node
-                //firstLevel
 
-                console.log("asp.allAspArray after first removement");
-                console.log(allAspArray);
-                tree[0].children = this.getFromBaseArray(allAspArray, asp.children);
+                // start children-adding-process with startnode as the base
+                serverNodes.forEach((aspect, x) => {
+                    asp.children.forEach((child, y) => {
+                        if(aspect.id == child.id){
+                            asp.children[y] = serverNodes[x];
+                        }
+                    });
+                });
+                tree[0].children = asp.children;
             }
         });
 
 
 
-        allAspArray.forEach((asp, i) => {
+        serverNodes.forEach((asp, i) => {
             console.log(typeof asp + ' ' + i + asp);
         });
-        console.log(allAspArray[0]);
+        console.log(serverNodes[0]);
 
 
         console.log("MODIFIED");
-        console.log(allAspArray);
+        console.log(serverNodes);
 
         console.log("TREE");
         console.log(tree);

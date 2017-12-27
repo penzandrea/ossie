@@ -1,0 +1,43 @@
+<div class="container">
+
+  <h1>{{project?.name}} Details</h1>
+
+  <form>
+  <table>
+    <thead>
+    <tr>
+      <th><input type="text" name="key" [(ngModel)]="filter.key" min="1" [attr.max]="[numberOfIssues]" step="1" placeholder="Id"></th>
+      <th><input type="text" name="component" [(ngModel)]="filter.component" placeholder="(Title) Components"></th>
+      <th><input type="text" name="severity" [(ngModel)]="filter.severity" placeholder="(Author) Severity"></th>
+      <th><input type="text" name="rule" [(ngModel)]="filter.rule" placeholder="(Year) Rules"></th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+      <td colspan="4">
+        <label for="limit">Limit: </label><input type="number" name="limit" [(ngModel)]="limit" min="1" [attr.max]="[numberOfIssues]" step="1" placeholder="Limit">
+        <label for="page">Page: </label><input type="number" name="page" [(ngModel)]="page" min="1" [attr.max]="[numberOfIssues]" step="1" placeholder="Page">
+      </td>
+    </tr>
+    </tfoot>
+    <tbody>
+<!--
+    <tr *ngFor="let issue of issues | issuefilter:filter | slice:(page-1)*limit:page*limit">
+-->
+    <tr *ngFor="let issue of groupedResults  | issuefilter:filter ">
+      <td>{{issue.key}}</td>
+      <td>{{issue.component}}</td>
+      <td>{{issue.severity}}</td>
+      <td>{{issue.rule}}</td>
+    </tr>
+    </tbody>
+  </table>
+  </form>
+
+  <p class="error" *ngIf="errorMesssonarkey">{{errorMesssonarkey}}</p>
+
+    <!--<app-issues-gouped-by-components></app-issues-gouped-by-components>
+    <app-issues-gouped-by-severity></app-issues-gouped-by-severity>
+    <app-issues-gouped-by-rules></app-issues-gouped-by-rules>-->
+
+  </div>

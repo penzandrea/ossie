@@ -27,7 +27,7 @@ export class AspectsService {
                 aspects => this.allAspects = aspects,
                 error => this.errorMessage = <any>error);
     }
-
+    // retrieve a list with all available aspects from the server
     aspectsSubject = new Subject<Aspect[]>();
 
     getAllAspectsFromServer() {
@@ -37,9 +37,9 @@ export class AspectsService {
                 data => { this.aspectsSubject.next(data); },
                 error => { console.log(error) });
     }
-
-    getChildrenForEachAspect(alliAspects: Aspect[]) {
-        this.allAspects = alliAspects;
+    // available aspects
+    getChildrenForEachAspect(allAspects: Aspect[]) {
+        this.allAspects = allAspects;
 
         let childrenObservables = this.allAspects.map((aspect, aspectIdx) => {
             return this.getAspectChildren(aspect)

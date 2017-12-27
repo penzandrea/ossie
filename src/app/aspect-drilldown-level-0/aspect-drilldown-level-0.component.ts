@@ -146,7 +146,7 @@ export class AspectDrilldownLevel0Component implements OnInit {
               });
               //console.log("EEEEEEEEEEEEEEEEEEE");
               this.asp = new Aspect (3, "", "", null);
-              this.jsonNodes = JSON.stringify(Aspect.aspectFromId(this.serverNodes, 411));
+              this.jsonNodes = JSON.stringify(Aspect.generateTree(this.serverNodes, 411));
               console.log("FFFFFFFFFFFFFFFFFFF");
               console.log(this.jsonNodes);
               //console.log(JSON.stringify(this.jsonNodes));

@@ -1,3 +1,5 @@
+<h2>SEVERITY</h2>
+
 <div *ngFor="let group of groupedResults" class='indent'>
 
   <mat-expansion-panel>
@@ -6,7 +8,7 @@
         <strong>{{group[0]}}</strong>
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <pre *ngFor="let result of group[1]" class='dataResult'>{{result.message}}</pre>
+    <pre *ngFor="let result of group[1]" class='dataResult'>{{result.rule}}</pre>
 
 
   </mat-expansion-panel>

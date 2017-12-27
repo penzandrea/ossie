@@ -1,9 +1,10 @@
+<h2>RULES</h2>
 <div *ngFor="let group of groupedResults" class='indent'>
 
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <strong>{{group[0]}}</strong>
+        <strong>{{group[1][0].rule}} test</strong>
       </mat-panel-title>
     </mat-expansion-panel-header>
     <pre *ngFor="let result of group[1]" class='dataResult'>{{result.message}}</pre>

@@ -8,8 +8,8 @@ import {Http, Response, RequestOptions, Headers} from '@angular/http';
 let id = 10;
 
 @Component({
-  selector: 'app-aspect-drilldown-level-1',
-  templateUrl: './aspect-drilldown-level-1.component.html',
+  selector: 'app-aspect-drilldown-level-2',
+  templateUrl: './aspect-drilldown-level-2.component.html',
   //styleUrls: ['../../../node_modules/angular-tree-component/dist/angular-tree-component.css']
   styles: [
     '.root1Class { color: blue }',
@@ -18,7 +18,6 @@ let id = 10;
 })
 export class AspectDrilldownLevel1Component implements OnInit {
   errorMessage: string;
-  startNode = 411;
   serverNodes: Aspect[];
   children: any;
   jsonNodes: any;
@@ -82,25 +81,31 @@ export class AspectDrilldownLevel1Component implements OnInit {
 
   ) {
 
+    let serverNodes;
+
     this.aspectsService.getAllAspectsFromServer();
     this.aspectsService.aspectsSubject.subscribe(
-        allAspects => {
-          this.serverNodes = allAspects;
-          // for each aspect search for its children
-          this.aspectsService.getChildrenForEachAspect(this.serverNodes).subscribe(
+        nodes => {
+          this.serverNodes = nodes;
+          this.aspectsService.getChildrenForEachAspect(nodes).subscribe(
               children => {
                 this.children = children;
 
-                // assign children to each aspect
+                // If you want to assign tasks to each process after all calls are finished:
                 children.forEach((child, i) => {
                   this.serverNodes[i].children = Aspect.fromJSONArray(children[i]);
                 });
-                // build tree beginning from startnode aspect 411
-                let tmpjson = JSON.stringify(Aspect.generateTree(this.serverNodes, this.startNode));
+                let asp = new Aspect (3, "", "", null);
+                let tmpjson = JSON.stringify(Aspect.generateTree(this.serverNodes, 411));
                 this.nodes = JSON.parse(tmpjson);
+
+
+                console.log("FFFFFFFFFFFFFFFFFFF");
 
               }
           );
+
+
         }
     );
 
@@ -124,6 +129,9 @@ export class AspectDrilldownLevel1Component implements OnInit {
 
   }
 
+
+
+
   addNodes() {
     this.nodes[1].children.push({
       id: ++id,
@@ -132,15 +140,12 @@ export class AspectDrilldownLevel1Component implements OnInit {
     this.nodes = [...this.nodes];
   }
 
-  /*
   getTree(node: any) {
     // subscribe to subject
     // Get the risk from the server
     let serverNodes;
 
     this.aspectsService.getAllAspectsFromServer();
-
-    // retrieve list with all aspects from the server
     this.aspectsService.aspectsSubject.subscribe(
         nodes => {
           this.serverNodes = nodes;
@@ -152,16 +157,24 @@ export class AspectDrilldownLevel1Component implements OnInit {
                 children.forEach((child, i) => {
                   this.serverNodes[i].children = Aspect.fromJSONArray(children[i]);
                 });
+                //console.log("EEEEEEEEEEEEEEEEEEE");
+                let asp = new Aspect (3, "", "", null);
                 this.jsonNodes = JSON.stringify(Aspect.generateTree(this.serverNodes, 411));
+                console.log("FFFFFFFFFFFFFFFFFFF");
+                console.log(this.jsonNodes);
+                //console.log(JSON.stringify(this.jsonNodes));
+                //console.log("FFFFFFFFFFFFFFFFFFFF");
 
               }
           );
+
+
         }
     );
     return new Promise((resolve, reject) => {
       setTimeout(() => resolve(this.jsonNodes), 1000);
     });
-  }*/
+  }
   getChildren(node: any) {
     /*    const newNodes = this.bla.map(
      (c) => Object.assign({}, c) //Klonen eines Objekts
