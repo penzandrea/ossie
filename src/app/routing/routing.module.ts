@@ -16,6 +16,7 @@ import {AspectDrilldownLevel1Component} from "../aspect-drilldown-level-1/aspect
 import {ProjectDetailFilterIssuesComponent} from "../project-detail-filter-issues/project-detail-filter-issues.component";
 import {ProjectDetailFilterIssuesComponent0} from "../project-detail-filter-issues-0/project-detail-filter-issues-0.component";
 import {ProjectDetailFilterIssuesComponent1} from "../project-detail-filter-issues-1/project-detail-filter-issues-1.component";
+import {ProjectDetailFilterIssuesComponent2} from "../project-detail-filter-issues-2/project-detail-filter-issues-2.component";
 
 
 // Define the routes
@@ -45,6 +46,7 @@ const ROUTES = [
   { path: 'project-detail-filter-issues/:id', component: ProjectDetailFilterIssuesComponent },
   { path: 'project-detail-filter-issues-0/:id', component: ProjectDetailFilterIssuesComponent0},
   { path: 'project-detail-filter-issues-1/:id', component: ProjectDetailFilterIssuesComponent1},
+  { path: 'project-detail-filter-issues-2/:id', component: ProjectDetailFilterIssuesComponent2},
 
 
 

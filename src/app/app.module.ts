@@ -35,6 +35,11 @@ import { AspectDrilldownLevel1Component } from './aspect-drilldown-level-1/aspec
 import { ProjectDetailFilterIssuesComponent } from "./project-detail-filter-issues/project-detail-filter-issues.component";
 import { ProjectDetailFilterIssuesComponent0 } from "./project-detail-filter-issues-0/project-detail-filter-issues-0.component";
 import { ProjectDetailFilterIssuesComponent1 } from "./project-detail-filter-issues-1/project-detail-filter-issues-1.component";
+import { ProjectDetailFilterIssuesComponent2 } from "./project-detail-filter-issues-2/project-detail-filter-issues-2.component";
+import { IssueFilterPipeTwoB } from './filter/issue-filter-2b.pipe';
+
+import { IssueFilterPipeTwoA } from './filter/issue-filter-2a.pipe';
+import { IssueFilterPipeTwo } from './filter/issue-filter-2.pipe';
 import { IssueFilterPipeOne } from './filter/issue-filter-1.pipe';
 import { IssueFilterPipeZero } from './filter/issue-filter-0.pipe';
 import { IssueFilterPipe } from './filter/issue-filter.pipe';
@@ -85,10 +90,15 @@ import { UniquePipe } from './filter/unique.pipe';
     ProjectDetailFilterIssuesComponent,
     ProjectDetailFilterIssuesComponent0,
     ProjectDetailFilterIssuesComponent1,
+    ProjectDetailFilterIssuesComponent2,
     IssueFilterPipe,
     IssueFilterPipeZero,
     IssueFilterPipeOne,
-    UniquePipe
+    IssueFilterPipeTwo,
+      IssueFilterPipeTwoA,
+      IssueFilterPipeTwoB,
+
+      UniquePipe
     ],
   providers: [BearsService,
   AspectsService, FactorsServiceService, ProjectsService, IssuesService],
