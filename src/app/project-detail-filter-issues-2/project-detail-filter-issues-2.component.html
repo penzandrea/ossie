@@ -6,15 +6,15 @@
 
   <h4>Severity</h4>
 
-  <button *ngFor="let issue of groupedResults  | unique:'severity' " class='dataResult' [ngClass]="{active: isActive(issue, 'severity')}" (click)="applyFilter(issue, 'severity')">{{issue.severity}}</button>
+  <button *ngFor="let issue of groupedResults  | issuefilter2a:filterComponent | issuefilter2b:filterRule | unique:'severity' " class='dataResult' [ngClass]="{active: isActive(issue, 'severity')}" (click)="applyFilter(issue, 'severity')">{{issue.severity}}</button>
 
   <h4>Components</h4>
 
-  <button *ngFor="let issue of groupedResults  | unique:'component' " class='dataResult' [ngClass]="{active: isActive(issue, 'component')}" (click)="applyFilter(issue, 'component')">{{issue.component}}</button>
+  <button *ngFor="let issue of groupedResults  | issuefilter2:filterSeverity | issuefilter2b:filterRule | unique:'component'   " class='dataResult' [ngClass]="{active: isActive(issue, 'component')}" (click)="applyFilter(issue, 'component')">{{issue.component}}</button>
 
   <h4>Rule</h4>
 
-  <button *ngFor="let issue of groupedResults  | unique:'rule' " class='dataResult' [ngClass]="{active: isActive(issue, 'rule')}" (click)="applyFilter(issue, 'rule')">{{issue.rule}}</button>
+  <button *ngFor="let issue of groupedResults   | issuefilter2:filterSeverity | issuefilter2a:filterComponent | unique:'rule'   " class='dataResult' [ngClass]="{active: isActive(issue, 'rule')}" (click)="applyFilter(issue, 'rule')">{{issue.rule}}</button>
 
 <!--
   <button [disabled]="noneSelected()" *ngFor="let issue of groupedResults  | unique:'rule' " class='dataResult' (click)="filterRule(issue.rule)">{{issue.rule}}</button>

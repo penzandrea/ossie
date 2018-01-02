@@ -6,7 +6,7 @@
  */
 import {Location} from "@angular/common";
 import "rxjs/add/operator/map";
-import {Component, Input, OnChanges, OnInit} from "@angular/core";
+import {Component, Input, OnChanges, OnInit, ChangeDetectionStrategy} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {ProjectsService} from "../projects.service";
@@ -18,7 +18,8 @@ import {forEach} from "@angular/router/src/utils/collection";
 @Component({
     selector: 'app-project-detail-filter-issues-2',
     templateUrl: './project-detail-filter-issues-2.component.html',
-    styleUrls: ['./project-detail-filter-issues-2.component.css']
+    styleUrls: ['./project-detail-filter-issues-2.component.css'],
+    //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectDetailFilterIssuesComponent2 implements OnInit {
 
@@ -74,11 +75,11 @@ export class ProjectDetailFilterIssuesComponent2 implements OnInit {
         }
 
         for (let filterItem of filterarray) {
-            console.log(filterItem); // 1, "string", false
-            console.log(item); // 1, "string", false
+            //console.log(filterItem); // 1, "string", false
+            //console.log(item); // 1, "string", false
 
             if (filterItem == item[filtertype]){
-                console.log("true");
+                //console.log("true");
                 return true;
             }
         }
@@ -87,6 +88,14 @@ export class ProjectDetailFilterIssuesComponent2 implements OnInit {
 
 
     applyFilter(issue: Issue, filtertype: string): void {
+
+        // IN ORDER TO ENABLE PURE PIPE RENEW LIST-REFERENCE:
+        let issuesTmp = this.groupedResults;
+
+        this.groupedResults = new Array<string>();
+        for (var i = 0; i < issuesTmp.length; i++){
+            this.groupedResults.push(issuesTmp[i]);
+        }
 
         let filterarray: Array<string>;
         switch (filtertype){

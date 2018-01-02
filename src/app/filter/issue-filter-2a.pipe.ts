@@ -3,9 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Issue } from '../model/issue';
 
 @Pipe({
-    name: 'issuefilter2a',
-    pure: false
-})
+    name: 'issuefilter2a'})
 
 /*
  @Pipe({
